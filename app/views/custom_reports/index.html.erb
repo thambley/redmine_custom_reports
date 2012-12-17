@@ -8,7 +8,7 @@
 
 <h2><%= l(:label_custom_report_plural) %></h2>
 
-<% if @custom_reports.any? %>
+<% if @custom_reports && @custom_reports.any? %>
   <div class="autoscroll">
     <table class="list custom_reports">
       <thead>
