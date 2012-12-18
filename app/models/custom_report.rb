@@ -24,12 +24,11 @@ class CustomReport < ActiveRecord::Base
   }
 
   def groupable_columns
-    QueryExt.new().groupable_columns.keep_if do |col|
+    QueryExt.new().groupable_columns.delete_if do |col|
       if col.respond_to? :custom_field
-        col.custom_field.is_for_all ||
-            project.all_issue_custom_fields.include?(col.custom_field)
+        !(col.custom_field.is_for_all && project.all_issue_custom_fields.include?(col.custom_field))
       else
-        true
+        false
       end
     end
   end
